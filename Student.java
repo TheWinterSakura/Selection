@@ -1,21 +1,41 @@
-class Student {
+public class Student {
     private String name;
-    private int studentId;
-
-    public Student(String name, int studentId) {
+    private String id;
+    private String className;
+    private String groupName;
+    
+    public Student(String name, String id, String className, String groupName) {
         this.name = name;
-        this.studentId = studentId;
+        this.id = id;
+        this.className = className;
+        this.groupName = groupName;
     }
-
+    
+    public Student(String name) {
+        this.name = name;
+        this.id = "";
+        this.className = "";
+        this.groupName = "";
+    }
+    
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    
+    public String getId() {
+        return id;
     }
-
-    public int getStudentId() {
-        return studentId;
+    
+    public String getClassName() {
+        return className;
+    }
+    
+    public String getGroupName() {
+        return groupName;
+    }
+    
+    @Override
+    public String toString() {
+        return "学生: " + name + ", 学号: " + id + ", 班级: " + className + ", 小组: " + groupName;
     }
 }
