@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Classes {
-    private String className;
-    private ArrayList<Group> groups;
+    private final String className;
+    private final ArrayList<Group> groups;
     
     public Classes(String className) {
         this.className = className;
@@ -29,15 +29,6 @@ public class Classes {
         }
         Random random = new Random();
         return groups.get(random.nextInt(groups.size()));
-    }
-    
-    public Student pickRandomStudent() {
-        ArrayList<Student> allStudents = getAllStudents();
-        if (allStudents.isEmpty()) {
-            return null;
-        }
-        Random random = new Random();
-        return allStudents.get(random.nextInt(allStudents.size()));
     }
     
     public ArrayList<Student> getAllStudents() {

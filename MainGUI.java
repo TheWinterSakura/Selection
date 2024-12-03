@@ -1,19 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MainGUI extends JFrame {
     private Classes classA;
     private Classes classB;
-    private ArrayList<Student> allStudentsFromBothClasses;
-    private JTextArea outputArea;
+    private final JTextArea outputArea;
     private ArrayList<Student> students;
-
-    public MainGUI() {
-        this(StudentDataManager.loadStudents());
-    }
 
     public MainGUI(ArrayList<Student> existingStudents) {
         this.students = existingStudents;
@@ -70,6 +64,14 @@ public class MainGUI extends JFrame {
         
         // 在所有UI组件初始化完成后，再初始化班级数据
         initializeData();
+        
+        // 添加窗口关闭事件监听器
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                onClose();
+            }
+        });
     }
     
     private void initializeData() {
@@ -136,7 +138,7 @@ public class MainGUI extends JFrame {
         
         String[] classOptions = {"Class A", "Class B"};
         int classChoice = JOptionPane.showOptionDialog(this,
-            "请选择班级",
+            "选择班级",
             "选择班级",
             JOptionPane.DEFAULT_OPTION,
             JOptionPane.QUESTION_MESSAGE,
@@ -255,7 +257,7 @@ public class MainGUI extends JFrame {
                     classA.findStudentById(searchText);
                 if (studentInA != null) {
                     result.append("在 Class A 中找到学生:\n");
-                    result.append(studentInA.toString()).append("\n");
+                    result.append(studentInA).append("\n");
                 }
                 
                 // 在 Class B 中查找
@@ -264,10 +266,10 @@ public class MainGUI extends JFrame {
                     classB.findStudentById(searchText);
                 if (studentInB != null) {
                     result.append("在 Class B 中找到学生:\n");
-                    result.append(studentInB.toString()).append("\n");
+                    result.append(studentInB).append("\n");
                 }
                 
-                if (result.length() == 0) {
+                if (result.isEmpty()) {
                     result.append("未找到").append(searchType == 0 ? "姓名为 " : "学号为 ")
                           .append(searchText).append(" 的学生");
                 }
@@ -387,14 +389,14 @@ public class MainGUI extends JFrame {
         initializeClasses();
         
         StringBuilder result = new StringBuilder();
-        result.append("当前所有学生信息：\n\n");
+        result.append("当前有学生信息：\n\n");
         
         // 显示 Class A 的学生
         result.append("=== Class A ===\n");
         for (Group group : classA.getGroups()) {
             result.append("\n").append(group.getGroupName()).append(":\n");
             for (Student student : group.getStudents()) {
-                result.append(student.toString()).append("\n");
+                result.append(student).append("\n");
             }
         }
         
@@ -403,7 +405,7 @@ public class MainGUI extends JFrame {
         for (Group group : classB.getGroups()) {
             result.append("\n").append(group.getGroupName()).append(":\n");
             for (Student student : group.getStudents()) {
-                result.append(student.toString()).append("\n");
+                result.append(student).append("\n");
             }
         }
         

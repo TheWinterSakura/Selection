@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Group {
-    private String groupName;
-    private ArrayList<Student> students;
+    private final String groupName;
+    private final ArrayList<Student> students;
     
     public Group(String groupName) {
         this.groupName = groupName;

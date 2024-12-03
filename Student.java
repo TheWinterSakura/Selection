@@ -11,13 +11,6 @@ public class Student {
         this.groupName = groupName;
     }
     
-    public Student(String name) {
-        this.name = name;
-        this.id = "";
-        this.className = "";
-        this.groupName = "";
-    }
-    
     public String getName() {
         return name;
     }
